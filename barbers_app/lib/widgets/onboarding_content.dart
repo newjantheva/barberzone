@@ -11,20 +11,22 @@ class OnboardingContent extends StatefulWidget {
 class _OnboardingContentState extends State<OnboardingContent> {
   late PageController _pageController;
   double _progress = 0;
+  int _currentPage = 0;
 
   @override
   void initState() {
     _pageController = PageController()
       ..addListener(() {
-        _onPageChanged();
+        _onPageChanged(_currentPage);
       });
 
     super.initState();
   }
 
-  void _onPageChanged() {
+  void _onPageChanged(int page) {
     setState(() {
       _progress = _pageController.page ?? 0;
+      _currentPage = page;
     });
   }
 
@@ -46,74 +48,11 @@ class _OnboardingContentState extends State<OnboardingContent> {
             children: [
               Expanded(
                 child: PageView(
-                  onPageChanged: (_) => _onPageChanged,
+                  onPageChanged: (page) => _onPageChanged,
                   controller: _pageController,
-                  children: [
-                    const LandingContent(),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const Flexible(
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 15, top: 25),
-                            child: Text(
-                              "Opret en konto",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 28,
-                              ),
-                            ),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.only(
-                            top: 45.0,
-                            left: 20,
-                            right: 20,
-                          ),
-                          child: Column(
-                            children: [
-                              TextField(
-                                decoration: InputDecoration(
-                                  suffixIcon: Icon(Icons.email),
-                                ),
-                              ),
-                              TextField(
-                                decoration: InputDecoration(
-                                  suffixIcon: Icon(Icons.lock),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              InkWell(
-                                child: Container(
-                                  decoration: const BoxDecoration(
-                                    gradient: LinearGradient(
-                                      colors: [
-                                        Colors.red,
-                                        Colors.blue,
-                                      ],
-                                    ),
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(25),
-                                    ),
-                                  ),
-                                  height: 45,
-                                  width: 100,
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
+                  children: const [
+                    LandingContent(),
+                    LoginContent(),
                   ],
                 ),
               ),
@@ -121,6 +60,80 @@ class _OnboardingContentState extends State<OnboardingContent> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class LoginContent extends StatelessWidget {
+  const LoginContent({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        const Flexible(
+          child: Padding(
+            padding: EdgeInsets.only(left: 15, top: 25),
+            child: Text(
+              "Opret en konto",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 28,
+              ),
+            ),
+          ),
+        ),
+        const Padding(
+          padding: EdgeInsets.only(
+            top: 45.0,
+            left: 20,
+            right: 20,
+          ),
+          child: Column(
+            children: [
+              TextField(
+                decoration: InputDecoration(
+                  suffixIcon: Icon(Icons.email),
+                ),
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  suffixIcon: Icon(Icons.lock),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              InkWell(
+                child: Container(
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.red,
+                        Colors.blue,
+                      ],
+                    ),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(25),
+                    ),
+                  ),
+                  height: 45,
+                  width: 100,
+                ),
+              ),
+            ],
+          ),
+        )
+      ],
     );
   }
 }
