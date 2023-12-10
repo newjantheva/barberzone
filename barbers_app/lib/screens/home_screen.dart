@@ -1,9 +1,11 @@
+import 'package:barbers_app/global/common/toast.dart';
 import 'package:barbers_app/models/navigation_item.dart';
 import 'package:barbers_app/screens/map_screen.dart';
 import 'package:barbers_app/screens/profile_screen.dart';
 import 'package:barbers_app/screens/search_screen.dart';
 import 'package:barbers_app/widgets/home_barbershop_carousel.dart';
 import 'package:barbers_app/widgets/home_haircuts_carousel.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -52,6 +54,14 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             onPressed: () {},
             icon: const Icon(Icons.notifications),
+          ),
+          IconButton(
+            onPressed: () {
+              FirebaseAuth.instance.signOut();
+              Navigator.pushNamed(context, "/login");
+              showToast(message: "Successfully signed out");
+            },
+            icon: const Icon(Icons.logout_rounded),
           )
         ],
       ),

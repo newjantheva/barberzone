@@ -1,4 +1,4 @@
-import 'package:barbers_app/widgets/onboarding.dart';
+import 'package:barbers_app/widgets/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 
 class MobileScaffold extends StatefulWidget {
@@ -11,6 +11,6 @@ class MobileScaffold extends StatefulWidget {
 class _MobileScaffoldState extends State<MobileScaffold> {
   @override
   Widget build(BuildContext context) {
-    return const Onboarding();
+    return const OnboardingScreen();
   }
 }
