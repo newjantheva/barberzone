@@ -2,7 +2,6 @@ import 'package:barbers_app/screens/booking_screen.dart';
 import 'package:barbers_app/screens/employees_screen.dart';
 import 'package:barbers_app/screens/home_screen.dart';
 import 'package:barbers_app/screens/login_page.dart';
-import 'package:barbers_app/screens/login_screen.dart';
 import 'package:barbers_app/screens/map_screen.dart';
 import 'package:barbers_app/screens/profile_screen.dart';
 import 'package:barbers_app/screens/search_screen.dart';
@@ -23,13 +22,13 @@ class Root extends StatelessWidget {
         textTheme: GoogleFonts.robotoTextTheme(),
       ),
       routes: {
-        '/': (context) => SplashScreen(child: LoginPage()),
-        '/login': (context) => LoginPage(),
-        '/signUp': (context) => SignUpPage(),
-        '/home': (context) => HomeScreen(),
-        '/map': (context) => MapScreen(),
-        '/search': (context) => SearchScreen(),
-        '/profile': (context) => ProfileScreen(),
+        '/': (context) => const HomeScreen(),
+        LoginPage.route : (context) => const LoginPage(),
+        '/signUp': (context) => const SignUpPage(),
+        '/home': (context) => const HomeScreen(),
+        '/map': (context) => const MapScreen(),
+        '/search': (context) => const SearchScreen(),
+        '/profile': (context) => const ProfileScreen(),
         '/employees': (context) => EmployeesScreen(),
         '/booking': (context) => BookingScreen(title: "test"),
       },
