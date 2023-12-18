@@ -1,4 +1,6 @@
 import 'package:barbers_app/models/barber_model.dart';
+import 'package:barbers_app/repo/barber_repository.dart';
+import 'package:barbers_app/service/barber_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -12,6 +14,7 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   bool isActive = false;
   final FocusNode _focusNode = FocusNode();
+  final IBarberRepository _repository = BarberRepository(BarberService());
   final TextEditingController _searchController = TextEditingController();
   List<Barber> barbers = [];
   List<Barber> filteredBarbers = [];
@@ -19,12 +22,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   void initState() {
     super.initState();
-    barbers = [
-      Barber(name: 'Elin Frisør', description: 'Varmeste Fade'),
-      Barber(name: 'Salon Eliten', description: 'Færdig ejer'),
-      Barber(name: 'Elias', description: 'Ligger den værste fade'),
-      Barber(name: 'Hørning Frisør', description: 'Fin nok')
-    ];
+    barbers = _repository.fetchBarbers();
   }
 
   void _filterBarbers(String query) {
