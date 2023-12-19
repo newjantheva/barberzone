@@ -19,14 +19,14 @@ class BarberListContent extends StatefulWidget {
 
 class _BarberListContentState extends State<BarberListContent> {
   static List<Barber> barbers = [
-    Barber(name: "John Doe", description: "description"),
-    Barber(name: "John Doe", description: "description"),
-    Barber(name: "John Doe", description: "description"),
-    Barber(name: "John Doe", description: "description"),
-    Barber(name: "John Doe", description: "description"),
-    Barber(name: "John Doe", description: "description"),
-    Barber(name: "John Doe", description: "description"),
-    Barber(name: "John Doe", description: "description"),
+    Barber(id: 1, name: "John Doe", description: "description"),
+    Barber(id: 1, name: "John Doe", description: "description"),
+    Barber(id: 1, name: "John Doe", description: "description"),
+    Barber(id: 1, name: "John Doe", description: "description"),
+    Barber(id: 1, name: "John Doe", description: "description"),
+    Barber(id: 1, name: "John Doe", description: "description"),
+    Barber(id: 1, name: "John Doe", description: "description"),
+    Barber(id: 1, name: "John Doe", description: "description"),
   ];
 
   @override

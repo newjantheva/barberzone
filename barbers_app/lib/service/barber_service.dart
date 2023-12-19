@@ -3,6 +3,7 @@ import 'package:barbers_app/models/barber_model.dart';
 abstract class IBarberService {
   List<Barber> getBarbers();
   Barber? getBarberById(int id);
+  void createBarber(String name, String description);
 }
 
 class BarberService implements IBarberService {
@@ -21,5 +22,17 @@ class BarberService implements IBarberService {
   @override
   Barber? getBarberById(int id) {
     return _barbers.firstWhere((barber) => barber.id == id);
+  }
+
+  @override
+  void createBarber(String name, String description) {
+    int newId = _barbers.length + 1;
+    Barber newBarber = Barber(
+      id: newId,
+      name: name,
+      description: description
+    );
+    _barbers.add(newBarber);
+    print(newBarber.name);
   }
 }
