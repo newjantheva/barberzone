@@ -7,10 +7,10 @@ abstract class IBarberService {
 
 class BarberService implements IBarberService {
   final List<Barber> _barbers = [
-      Barber(id: 1, name: 'Elin Frisør', description: 'Varmeste Fade'),
-      Barber(id: 2, name: 'Salon Eliten', description: 'Færdig ejer'),
-      Barber(id: 3, name: 'Elias', description: 'Ligger den værste fade'),
-      Barber(id: 4, name: 'Hørning Frisør', description: 'Fin nok')
+    Barber(id: 1, name: 'Elin Frisør', description: 'Varmeste Fade'),
+    Barber(id: 2, name: 'Salon Eliten', description: 'Færdig ejer'),
+    Barber(id: 3, name: 'Elias', description: 'Ligger den værste fade'),
+    Barber(id: 4, name: 'Hørning Frisør', description: 'Fin nok')
   ];
 
   @override

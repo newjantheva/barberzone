@@ -1,8 +1,10 @@
+import 'package:barbers_app/blocs/search_bloc/search_bloc.dart';
 import 'package:barbers_app/models/barber_model.dart';
 import 'package:barbers_app/repo/barber_repository.dart';
 import 'package:barbers_app/service/barber_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -21,22 +23,17 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   void initState() {
+    fetch();
+
     super.initState();
+  }
+
+  void fetch() {
     barbers = _repository.fetchBarbers();
   }
 
   void _filterBarbers(String query) {
-    debugPrint(query);
-    List<Barber> results = [];
-    if (query.isNotEmpty) {
-      results = barbers
-          .where((barber) =>
-              barber.name.toLowerCase().contains(query.toLowerCase()))
-          .toList();
-    }
-    setState(() {
-      filteredBarbers = results;
-    });
+    BlocProvider.of<SearchBloc>(context).add(SearchBarbersEvent(query: query));
   }
 
   @override
@@ -89,15 +86,7 @@ class _SearchScreenState extends State<SearchScreen> {
               Positioned(
                 right: 10,
                 child: InkWell(
-                  onTap: () {
-                    _focusNode.unfocus();
-                    SystemChannels.textInput.invokeMethod('TextInput.hide');
-                    setState(() {
-                      isActive = false;
-                      _searchController.clear();
-                      _filterBarbers('');
-                    });
-                  },
+                  onTap: _cancelSearch,
                   child: const Padding(
                     padding: EdgeInsets.all(10.0),
                     child: Text(
@@ -109,32 +98,71 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
           ],
         ),
-        Expanded(
-          child: ListView.builder(
-            itemCount: filteredBarbers.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(
-                  filteredBarbers[index].name,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold
-                  ),
-                ),
-                subtitle: Text(
-                  filteredBarbers[index].description,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold
-                  ),
-                ),
-              );
-            },
-          ),
+        BlocBuilder<SearchBloc, SearchState>(
+          builder: (context, state) {
+            switch (state) {
+              case SearchEmpty():
+                return const Text(
+                  "Empty",
+                  style: TextStyle(color: Colors.white),
+                );
+              case SearchLoading():
+                return const Text("Loading",
+                    style: TextStyle(color: Colors.white));
+              case SearchSuccess():
+                {
+                  final statebarbers = state.barbers;
+                  if (statebarbers.isEmpty) {
+                    return _buildSearchResults(statebarbers);
+                  } else {
+                    return _buildSearchResults(barbers);
+                  }
+                }
+
+              case SearchFailure():
+                return const Text("Failure",
+                    style: TextStyle(color: Colors.white));
+              default:
+                return Container();
+            }
+          },
         ),
       ],
     );
+  }
+
+  Expanded _buildSearchResults(List<Barber> barbers) {
+    return Expanded(
+      child: ListView.builder(
+        itemCount: barbers.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(
+              barbers[index].name,
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold),
+            ),
+            subtitle: Text(
+              barbers[index].description,
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  void _cancelSearch() {
+    _focusNode.unfocus();
+    SystemChannels.textInput.invokeMethod('TextInput.hide');
+    isActive = false;
+    _searchController.clear();
+    // setState(() {});
+    fetch();
   }
 }
