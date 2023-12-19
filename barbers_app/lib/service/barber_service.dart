@@ -15,12 +15,18 @@ class BarberService implements IBarberService {
 
   @override
   Future<List<Barber>> getBarbers() async {
-    final barbersData = await db.collection("barberzone").get();
+    try {
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('barberzone')
+          .doc('barbers')
+          .collection('first-sample')
+          .get();
 
-    for (var barberData in barbersData.docs) {
-      final barber = Barber.fromMap(barberData.data());
-      _barbers.add(barber);
-    }
+      for (var doc in querySnapshot.docs) {
+        Barber barber = Barber.fromMap(doc.data() as Map<String, dynamic>);
+        _barbers.add(barber);
+      }
+    } catch (e) {}
 
     return _barbers;
   }
