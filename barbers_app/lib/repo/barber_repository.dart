@@ -1,6 +1,5 @@
 import 'package:barbers_app/models/barber_model.dart';
 import 'package:barbers_app/service/barber_service.dart';
-import 'package:flutter/material.dart';
 
 abstract class IBarberRepository {
   List<Barber> fetchBarbers();
@@ -39,8 +38,6 @@ class BarberRepository implements IBarberRepository {
 
     return results;
   }
-}
-
 
   @override
   void createBarber(String name, String description) {

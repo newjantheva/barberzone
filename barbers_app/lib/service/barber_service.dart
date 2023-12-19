@@ -23,4 +23,11 @@ class BarberService implements IBarberService {
   Barber? getBarberById(int id) {
     return _barbers.firstWhere((barber) => barber.id == id);
   }
+
+  @override
+  void createBarber(String name, String description) {
+    int newId = _barbers.length + 1;
+    Barber newBarber = Barber(id: newId, name: name, description: description);
+    _barbers.add(newBarber);
+  }
 }
