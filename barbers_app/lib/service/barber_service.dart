@@ -1,21 +1,27 @@
 import 'package:barbers_app/models/barber_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 abstract class IBarberService {
-  List<Barber> getBarbers();
+  Future<List<Barber>> getBarbers();
   Barber? getBarberById(int id);
   void createBarber(String name, String description);
 }
 
 class BarberService implements IBarberService {
-  final List<Barber> _barbers = [
-    Barber(id: 1, name: 'Elin Frisør', description: 'Varmeste Fade'),
-    Barber(id: 2, name: 'Salon Eliten', description: 'Færdig ejer'),
-    Barber(id: 3, name: 'Elias', description: 'Ligger den værste fade'),
-    Barber(id: 4, name: 'Hørning Frisør', description: 'Fin nok')
-  ];
+  FirebaseFirestore db = FirebaseFirestore.instance;
+
+  BarberService();
+  final List<Barber> _barbers = [];
 
   @override
-  List<Barber> getBarbers() {
+  Future<List<Barber>> getBarbers() async {
+    final barbersData = await db.collection("barberzone").get();
+
+    for (var barberData in barbersData.docs) {
+      final barber = Barber.fromMap(barberData.data());
+      _barbers.add(barber);
+    }
+
     return _barbers;
   }
 

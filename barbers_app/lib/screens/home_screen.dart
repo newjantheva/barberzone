@@ -8,6 +8,7 @@ import 'package:barbers_app/screens/search_screen.dart';
 import 'package:barbers_app/service/barber_service.dart';
 import 'package:barbers_app/widgets/home_barbershop_carousel.dart';
 import 'package:barbers_app/widgets/home_haircuts_carousel.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -21,9 +22,14 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
 
+  @override
+  void initState() {
+    super.initState();
+  }
+
   void _openCreateBarberScreen() {
     Navigator.pushNamed(context, CreateBarberScreen.route);
-}
+  }
 
   final _navigationItems = [
     NavigationItem(
@@ -70,7 +76,8 @@ class _HomeScreenState extends State<HomeScreen> {
             },
             icon: const Icon(Icons.logout_rounded),
           ),
-          IconButton(onPressed: _openCreateBarberScreen, icon: const Icon(Icons.add))
+          IconButton(
+              onPressed: _openCreateBarberScreen, icon: const Icon(Icons.add))
         ],
       ),
       body: Padding(

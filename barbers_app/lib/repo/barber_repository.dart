@@ -2,9 +2,9 @@ import 'package:barbers_app/models/barber_model.dart';
 import 'package:barbers_app/service/barber_service.dart';
 
 abstract class IBarberRepository {
-  List<Barber> fetchBarbers();
+  Future<List<Barber>> fetchBarbers();
   Barber? fetchBarberById(int id);
-  List<Barber> searchBarbers(String query);
+  Future<List<Barber>> searchBarbers(String query);
   void createBarber(String name, String description);
 }
 
@@ -14,8 +14,8 @@ class BarberRepository implements IBarberRepository {
   BarberRepository(this._service);
 
   @override
-  List<Barber> fetchBarbers() {
-    return _service.getBarbers();
+  Future<List<Barber>> fetchBarbers() async {
+    return await _service.getBarbers();
   }
 
   @override
@@ -24,10 +24,10 @@ class BarberRepository implements IBarberRepository {
   }
 
   @override
-  List<Barber> searchBarbers(String query) {
+  Future<List<Barber>> searchBarbers(String query) async {
     List<Barber> results = [];
 
-    final barbers = fetchBarbers();
+    final barbers = await fetchBarbers();
 
     if (query.isNotEmpty) {
       results = barbers
