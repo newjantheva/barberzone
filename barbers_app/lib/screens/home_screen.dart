@@ -1,8 +1,11 @@
 import 'package:barbers_app/global/common/toast.dart';
 import 'package:barbers_app/models/navigation_item.dart';
+import 'package:barbers_app/repo/barber_repository.dart';
+import 'package:barbers_app/screens/create_barber_screen.dart';
 import 'package:barbers_app/screens/map_screen.dart';
 import 'package:barbers_app/screens/profile_screen.dart';
 import 'package:barbers_app/screens/search_screen.dart';
+import 'package:barbers_app/service/barber_service.dart';
 import 'package:barbers_app/widgets/home_barbershop_carousel.dart';
 import 'package:barbers_app/widgets/home_haircuts_carousel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -17,6 +20,10 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
+
+  void _openCreateBarberScreen() {
+    Navigator.pushNamed(context, CreateBarberScreen.route);
+}
 
   final _navigationItems = [
     NavigationItem(
@@ -62,7 +69,8 @@ class _HomeScreenState extends State<HomeScreen> {
               showToast(message: "Successfully signed out");
             },
             icon: const Icon(Icons.logout_rounded),
-          )
+          ),
+          IconButton(onPressed: _openCreateBarberScreen, icon: const Icon(Icons.add))
         ],
       ),
       body: Padding(

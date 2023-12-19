@@ -1,11 +1,11 @@
 import 'package:barbers_app/models/barber_model.dart';
 import 'package:barbers_app/service/barber_service.dart';
-import 'package:flutter/material.dart';
 
 abstract class IBarberRepository {
   List<Barber> fetchBarbers();
   Barber? fetchBarberById(int id);
   List<Barber> searchBarbers(String query);
+  void createBarber(String name, String description);
 }
 
 class BarberRepository implements IBarberRepository {
@@ -37,5 +37,10 @@ class BarberRepository implements IBarberRepository {
     }
 
     return results;
+  }
+
+  @override
+  void createBarber(String name, String description) {
+    _service.createBarber(name, description);
   }
 }

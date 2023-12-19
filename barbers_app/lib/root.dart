@@ -1,6 +1,7 @@
 import 'package:barbers_app/blocs/search_bloc/search_bloc.dart';
 import 'package:barbers_app/repo/barber_repository.dart';
 import 'package:barbers_app/screens/booking_screen.dart';
+import 'package:barbers_app/screens/create_barber_screen.dart';
 import 'package:barbers_app/screens/employees_screen.dart';
 import 'package:barbers_app/screens/home_screen.dart';
 import 'package:barbers_app/screens/login_page.dart';
