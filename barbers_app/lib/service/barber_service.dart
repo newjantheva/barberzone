@@ -8,10 +8,10 @@ abstract class IBarberService {
 
 class BarberService implements IBarberService {
   final List<Barber> _barbers = [
-      Barber(id: 1, name: 'Elin Frisør', description: 'Varmeste Fade'),
-      Barber(id: 2, name: 'Salon Eliten', description: 'Færdig ejer'),
-      Barber(id: 3, name: 'Elias', description: 'Ligger den værste fade'),
-      Barber(id: 4, name: 'Hørning Frisør', description: 'Fin nok')
+    Barber(id: 1, name: 'Elin Frisør', description: 'Varmeste Fade'),
+    Barber(id: 2, name: 'Salon Eliten', description: 'Færdig ejer'),
+    Barber(id: 3, name: 'Elias', description: 'Ligger den værste fade'),
+    Barber(id: 4, name: 'Hørning Frisør', description: 'Fin nok')
   ];
 
   @override
@@ -22,17 +22,5 @@ class BarberService implements IBarberService {
   @override
   Barber? getBarberById(int id) {
     return _barbers.firstWhere((barber) => barber.id == id);
-  }
-
-  @override
-  void createBarber(String name, String description) {
-    int newId = _barbers.length + 1;
-    Barber newBarber = Barber(
-      id: newId,
-      name: name,
-      description: description
-    );
-    _barbers.add(newBarber);
-    print(newBarber.name);
   }
 }
