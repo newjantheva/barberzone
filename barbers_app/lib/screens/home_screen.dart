@@ -27,8 +27,8 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
-  void _openCreateBarberScreen() {
-    Navigator.pushNamed(context, CreateBarberScreen.route);
+  void _openCreateBarberScreen(BuildContext context) {
+    
   }
 
   final _navigationItems = [
@@ -77,7 +77,9 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: const Icon(Icons.logout_rounded),
           ),
           IconButton(
-              onPressed: _openCreateBarberScreen, icon: const Icon(Icons.add))
+            onPressed: () => Navigator.pushNamed(context,CreateBarberScreen.route),
+            icon: const Icon(Icons.add),
+          )
         ],
       ),
       body: Padding(

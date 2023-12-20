@@ -1,3 +1,4 @@
+import 'package:barbers_app/blocs/barber_bloc/barber_bloc.dart';
 import 'package:barbers_app/blocs/search_bloc/search_bloc.dart';
 import 'package:barbers_app/repo/barber_repository.dart';
 import 'package:barbers_app/screens/booking_screen.dart';
@@ -19,12 +20,23 @@ class Root extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => SearchBloc(
-        repository: BarberRepository(
-          BarberService(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => SearchBloc(
+            repository: BarberRepository(
+              BarberService(),
+            ),
+          ),
         ),
-      ),
+        BlocProvider(
+          create: (context) => BarberBloc(
+            repository: BarberRepository(
+              BarberService(),
+            ),
+          ),
+        )
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
@@ -41,6 +53,7 @@ class Root extends StatelessWidget {
           '/profile': (context) => const ProfileScreen(),
           '/employees': (context) => const EmployeesScreen(),
           '/booking': (context) => const BookingScreen(title: "test"),
+          '/createbarber': (context) => const CreateBarberScreen(),
         },
       ),
     );

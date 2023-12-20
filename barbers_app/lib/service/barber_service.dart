@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 abstract class IBarberService {
   Future<List<Barber>> getBarbers();
   Barber? getBarberById(int id);
-  void createBarber(String name, String description);
+  Future<Barber> createBarber(String name, String description);
 }
 
 class BarberService implements IBarberService {
@@ -37,9 +37,12 @@ class BarberService implements IBarberService {
   }
 
   @override
-  void createBarber(String name, String description) {
+  Future<Barber> createBarber(String name, String description) async {
     int newId = _barbers.length + 1;
     Barber newBarber = Barber(id: newId, name: name, description: description);
-    _barbers.add(newBarber);
+    DocumentReference barbersDoc = FirebaseFirestore.instance.collection('barberzone').doc('barbers');
+    CollectionReference barbersCollection = barbersDoc.collection('first-sample');
+    await barbersCollection.add(newBarber.toMap());
+    return newBarber;
   }
 }

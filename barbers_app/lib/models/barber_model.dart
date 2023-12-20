@@ -12,4 +12,12 @@ class Barber {
       description: map['description'] ?? '',
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'description': description
+    };
+  }
 }

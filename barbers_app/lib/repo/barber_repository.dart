@@ -5,7 +5,7 @@ abstract class IBarberRepository {
   Future<List<Barber>> fetchBarbers();
   Barber? fetchBarberById(int id);
   Future<List<Barber>> searchBarbers(String query);
-  void createBarber(String name, String description);
+  Future<Barber> createBarber(String name, String description);
 }
 
 class BarberRepository implements IBarberRepository {
@@ -40,7 +40,8 @@ class BarberRepository implements IBarberRepository {
   }
 
   @override
-  void createBarber(String name, String description) {
-    _service.createBarber(name, description);
+  Future<Barber> createBarber(String name, String description) {
+    final barber = _service.createBarber(name, description);
+    return barber;
   }
 }
