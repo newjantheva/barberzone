@@ -8,7 +8,6 @@ import 'package:barbers_app/screens/search_screen.dart';
 import 'package:barbers_app/widgets/home_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -19,12 +18,10 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
-  final PageController controller = PageController();
+  final PageController controller = PageController(initialPage: 0);
 
   @override
   void initState() {
-    BlocProvider.of<BarberBloc>(context).add(FetchBarbers());
-
     super.initState();
   }
 
@@ -104,9 +101,6 @@ class _HomeScreenState extends State<HomeScreen> {
         showSelectedLabels: false,
         showUnselectedLabels: false,
         elevation: 0,
-        backgroundColor: Colors.black,
-        selectedItemColor: const Color.fromARGB(255, 255, 98, 7),
-        unselectedItemColor: Colors.white,
         items: _navigationItems
             .map(
               (e) => BottomNavigationBarItem(icon: e.icon!, label: e.label),

@@ -46,7 +46,6 @@ class _HomeBarbershopCarouselState extends State<HomeBarbershopCarousel> {
                             Radius.circular(5),
                           ),
                           border: Border.all(
-                            color: Colors.white60,
                             style: BorderStyle.solid,
                             width: 2,
                           ),
@@ -69,7 +68,6 @@ class _HomeBarbershopCarouselState extends State<HomeBarbershopCarousel> {
                                 state.barbers[index].name,
                                 style: const TextStyle(
                                   fontSize: 30,
-                                  color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -79,7 +77,6 @@ class _HomeBarbershopCarouselState extends State<HomeBarbershopCarousel> {
                                     state.barbers[index].description,
                                     style: const TextStyle(
                                       fontSize: 15,
-                                      color: Colors.white,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),

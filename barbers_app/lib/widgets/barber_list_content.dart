@@ -48,7 +48,6 @@ class BarberListContent extends StatelessWidget {
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(8),
                                         border: Border.all(
-                                            color: Colors.grey,
                                             width: 0.5,
                                             style: BorderStyle.solid),
                                       ),

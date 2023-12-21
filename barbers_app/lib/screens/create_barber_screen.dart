@@ -36,42 +36,29 @@ class _CreateBarberScreenState extends State<CreateBarberScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Colors.black,
         title: const Text(
           'Create Barber',
-          style: TextStyle(color: Colors.white),
         ),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             TextField(
-              cursorColor: const Color.fromARGB(255, 255, 98, 7),
               controller: _nameController,
-              style: const TextStyle(color: Colors.white),
               decoration: const InputDecoration(
                 hintText: 'Name',
-                hintStyle: TextStyle(color: Colors.white),
                 focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Color.fromARGB(255, 255, 98, 7),
-                  ),
+                  borderSide: BorderSide(),
                 ),
               ),
             ),
             TextField(
-              cursorColor: const Color.fromARGB(255, 255, 98, 7),
               controller: _descriptionController,
-              style: const TextStyle(color: Colors.white),
               decoration: const InputDecoration(
                 hintText: 'Description',
-                hintStyle: TextStyle(color: Colors.white),
                 focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Color.fromARGB(255, 255, 98, 7),
-                  ),
+                  borderSide: BorderSide(),
                 ),
               ),
             ),
@@ -79,9 +66,7 @@ class _CreateBarberScreenState extends State<CreateBarberScreen> {
               onPressed: _createBarber,
               child: const Text(
                 'Create Barber',
-                style: TextStyle(
-                  color: Colors.black,
-                ),
+                style: TextStyle(),
               ),
             ),
           ],

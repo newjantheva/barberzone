@@ -1,6 +1,5 @@
 import 'package:barbers_app/blocs/barber_bloc/barber_bloc.dart';
 import 'package:barbers_app/get_it.dart';
-import 'package:barbers_app/screens/booking_screen.dart';
 import 'package:barbers_app/screens/home_screen.dart';
 import 'package:barbers_app/screens/login_page.dart';
 import 'package:barbers_app/screens/map_screen.dart';
@@ -25,8 +24,9 @@ class BarbersApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          colorScheme: const ColorScheme.highContrastDark(),
-          textTheme: GoogleFonts.robotoTextTheme(),
+          useMaterial3: true,
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
+          fontFamily: GoogleFonts.getFont('Montserrat').fontFamily,
         ),
         routes: {
           '/': (context) => const HomeScreen(),
@@ -36,7 +36,6 @@ class BarbersApp extends StatelessWidget {
           '/map': (context) => const MapScreen(),
           '/search': (context) => const SearchScreen(),
           '/profile': (context) => const ProfileScreen(),
-          '/booking': (context) => const BookingScreen(title: "test"),
         },
       ),
     );
