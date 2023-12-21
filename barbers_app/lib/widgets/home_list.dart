@@ -11,14 +11,7 @@ class HomeList extends StatelessWidget {
       slivers: [
         SliverAppBar(
           backgroundColor: Colors.white,
-          title: const Text(
-            'Barbers',
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          expandedHeight: 275,
+          expandedHeight: 250,
           flexibleSpace: FlexibleSpaceBar(
             background: Container(
               color: Colors.black,
@@ -160,7 +153,6 @@ class HomeList extends StatelessWidget {
       context: context,
       builder: (context) {
         return BottomSheet(
-          backgroundColor: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),

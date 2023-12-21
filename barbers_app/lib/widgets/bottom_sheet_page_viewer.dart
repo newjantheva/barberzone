@@ -1,4 +1,3 @@
-import 'package:barbers_app/responsive/mobile_body.dart';
 import 'package:barbers_app/widgets/barber_list_content.dart';
 import 'package:barbers_app/widgets/booking_datetime_content.dart';
 import 'package:barbers_app/widgets/product_service_list_content.dart';
@@ -15,14 +14,14 @@ class BottomSheetPageViewer extends StatelessWidget {
       controller: _pageController,
       children: <Widget>[
         // Page 1ss
-        // BarberListContent(
-        //   text: 'Page 1',
-        //   nextPage: () {
-        //     _pageController.nextPage(
-        //         duration: const Duration(milliseconds: 300),
-        //         curve: Curves.ease);
-        //   },
-        // ),
+        BarberListContent(
+          text: 'Page 1',
+          nextPage: () {
+            _pageController.nextPage(
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.ease);
+          },
+        ),
 
         // Page 2
         ProductServiceListContent(

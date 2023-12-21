@@ -13,6 +13,7 @@ class _HomeBarbershopCarouselState extends State<HomeBarbershopCarousel> {
   @override
   void initState() {
     BlocProvider.of<BarberBloc>(context).add(FetchBarbers());
+
     super.initState();
   }
 

@@ -5,8 +5,7 @@ import 'package:barbers_app/screens/create_barber_screen.dart';
 import 'package:barbers_app/screens/map_screen.dart';
 import 'package:barbers_app/screens/profile_screen.dart';
 import 'package:barbers_app/screens/search_screen.dart';
-import 'package:barbers_app/widgets/home_barbershop_carousel.dart';
-import 'package:barbers_app/widgets/home_haircuts_carousel.dart';
+import 'package:barbers_app/widgets/home_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,9 +19,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
+  final PageController controller = PageController();
 
   @override
   void initState() {
+    BlocProvider.of<BarberBloc>(context).add(FetchBarbers());
+
     super.initState();
   }
 
@@ -34,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
     NavigationItem(
       "Home",
       const Icon(Icons.home),
-      const HomeScreenContent(),
+      const HomeList(),
     ),
     NavigationItem(
       "Profile",
@@ -56,12 +58,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Colors.black,
         title: const Text("Welcome",
             style: TextStyle(fontWeight: FontWeight.bold)),
-        foregroundColor: Colors.white,
         actions: [
           IconButton(
             onPressed: () {},
@@ -79,19 +78,26 @@ class _HomeScreenState extends State<HomeScreen> {
               onPressed: _openCreateBarberScreen, icon: const Icon(Icons.add))
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: IndexedStack(
-          index: _currentIndex,
-          children: [
-            ..._navigationItems.map((e) => e.page!).toList(),
-          ],
-        ),
+      body: PageView(
+        pageSnapping: false,
+        physics: const NeverScrollableScrollPhysics(),
+        onPageChanged: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        controller: controller,
+        children: [
+          ..._navigationItems.map(
+            (e) => e.page ?? Container(),
+          ),
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) => setState(() {
           _currentIndex = index;
+          controller.jumpToPage(_currentIndex);
         }),
         type: BottomNavigationBarType.fixed,
         enableFeedback: false,
@@ -107,30 +113,6 @@ class _HomeScreenState extends State<HomeScreen> {
             )
             .toList(),
       ),
-    );
-  }
-}
-
-class HomeScreenContent extends StatelessWidget {
-  const HomeScreenContent({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(
-            height: 200, width: double.infinity, child: HomeHaircutsCarousel()),
-        SizedBox(height: 30),
-        Text("Barbershop",
-            style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 16)),
-        SizedBox(height: 15),
-        Expanded(child: HomeBarbershopCarousel()),
-        SizedBox(height: 30),
-      ],
     );
   }
 }
