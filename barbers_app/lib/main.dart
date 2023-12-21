@@ -1,11 +1,12 @@
+import 'package:barbers_app/get_it.dart';
 import 'package:barbers_app/root.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp();
-
+  await setupGetIt();
   runApp(const Root());
 }

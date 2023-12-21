@@ -1,7 +1,6 @@
 import 'package:barbers_app/blocs/search_bloc/search_bloc.dart';
 import 'package:barbers_app/models/barber_model.dart';
-import 'package:barbers_app/repo/barber_repository.dart';
-import 'package:barbers_app/service/barber_service.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,24 +15,17 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   bool isActive = false;
   final FocusNode _focusNode = FocusNode();
-  final IBarberRepository _repository = BarberRepository(BarberService());
   final TextEditingController _searchController = TextEditingController();
   List<Barber> barbers = [];
   List<Barber> filteredBarbers = [];
 
   @override
   void initState() {
-    fetch();
-
     super.initState();
   }
 
-  Future<void> fetch() async {
-    barbers = await _repository.fetchBarbers();
-  }
-
   void _filterBarbers(String query) {
-    BlocProvider.of<SearchBloc>(context).add(SearchBarbersEvent(query: query));
+    // BlocProvider.of<SearchBloc>(context).add(SearchBarbersEvent(query: query));
   }
 
   @override
@@ -98,35 +90,35 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
           ],
         ),
-        BlocBuilder<SearchBloc, SearchState>(
-          builder: (context, state) {
-            switch (state) {
-              case SearchEmpty():
-                return const Text(
-                  "Empty",
-                  style: TextStyle(color: Colors.white),
-                );
-              case SearchLoading():
-                return const Text("Loading",
-                    style: TextStyle(color: Colors.white));
-              case SearchSuccess():
-                {
-                  final statebarbers = state.barbers;
-                  if (statebarbers.isEmpty) {
-                    return _buildSearchResults(statebarbers);
-                  } else {
-                    return _buildSearchResults(barbers);
-                  }
-                }
+        // BlocBuilder<SearchBloc, SearchState>(
+        //   builder: (context, state) {
+        //     switch (state) {
+        //       case SearchEmpty():
+        //         return const Text(
+        //           "Empty",
+        //           style: TextStyle(color: Colors.white),
+        //         );
+        //       case SearchLoading():
+        //         return const Text("Loading",
+        //             style: TextStyle(color: Colors.white));
+        //       case SearchSuccess():
+        //         {
+        //           final statebarbers = state.barbers;
+        //           if (statebarbers.isEmpty) {
+        //             return _buildSearchResults(statebarbers);
+        //           } else {
+        //             return _buildSearchResults(barbers);
+        //           }
+        //         }
 
-              case SearchFailure():
-                return const Text("Failure",
-                    style: TextStyle(color: Colors.white));
-              default:
-                return Container();
-            }
-          },
-        ),
+        //       case SearchFailure():
+        //         return const Text("Failure",
+        //             style: TextStyle(color: Colors.white));
+        //       default:
+        //         return Container();
+        //     }
+        //   },
+        // ),
       ],
     );
   }
@@ -162,7 +154,5 @@ class _SearchScreenState extends State<SearchScreen> {
     SystemChannels.textInput.invokeMethod('TextInput.hide');
     isActive = false;
     _searchController.clear();
-    // setState(() {});
-    fetch();
   }
 }

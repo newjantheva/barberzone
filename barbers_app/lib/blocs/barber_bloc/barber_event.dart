@@ -6,3 +6,5 @@ sealed class BarberEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class FetchBarbers extends BarberEvent {}

@@ -1,16 +1,15 @@
+import 'package:barbers_app/blocs/barber_bloc/barber_bloc.dart';
 import 'package:barbers_app/global/common/toast.dart';
 import 'package:barbers_app/models/navigation_item.dart';
-import 'package:barbers_app/repo/barber_repository.dart';
 import 'package:barbers_app/screens/create_barber_screen.dart';
 import 'package:barbers_app/screens/map_screen.dart';
 import 'package:barbers_app/screens/profile_screen.dart';
 import 'package:barbers_app/screens/search_screen.dart';
-import 'package:barbers_app/service/barber_service.dart';
 import 'package:barbers_app/widgets/home_barbershop_carousel.dart';
 import 'package:barbers_app/widgets/home_haircuts_carousel.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

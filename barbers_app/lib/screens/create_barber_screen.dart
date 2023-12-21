@@ -1,4 +1,4 @@
-import 'package:barbers_app/repo/barber_repository.dart';
+import 'package:barbers_app/repositories/barber_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,10 +18,10 @@ class _CreateBarberScreenState extends State<CreateBarberScreen> {
   void _createBarber() {
     if (_nameController.text.isNotEmpty &&
         _descriptionController.text.isNotEmpty) {
-      final barberRepository =
-          Provider.of<BarberRepository>(context, listen: false);
-      barberRepository.createBarber(
-          _nameController.text, _descriptionController.text);
+      // final barberRepository =
+      //     Provider.of<BarberRepository>(context, listen: false);
+      // barberRepository.createBarber(
+      //     _nameController.text, _descriptionController.text);
       Navigator.of(context).pop();
     }
   }

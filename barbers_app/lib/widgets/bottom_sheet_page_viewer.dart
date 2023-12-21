@@ -15,14 +15,14 @@ class BottomSheetPageViewer extends StatelessWidget {
       controller: _pageController,
       children: <Widget>[
         // Page 1ss
-        BarberListContent(
-          text: 'Page 1',
-          nextPage: () {
-            _pageController.nextPage(
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.ease);
-          },
-        ),
+        // BarberListContent(
+        //   text: 'Page 1',
+        //   nextPage: () {
+        //     _pageController.nextPage(
+        //         duration: const Duration(milliseconds: 300),
+        //         curve: Curves.ease);
+        //   },
+        // ),
 
         // Page 2
         ProductServiceListContent(
