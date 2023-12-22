@@ -1,7 +1,8 @@
 class Barber {
   final int id;
-  final String name;
-  final String description;
+  String? name;
+  String? description;
+  //final bool isMobileCutAvailable;
 
   Barber({required this.id, required this.name, required this.description});
 

@@ -10,6 +10,7 @@ import 'package:barbers_app/screens/map_screen.dart';
 import 'package:barbers_app/screens/profile_screen.dart';
 import 'package:barbers_app/screens/search_screen.dart';
 import 'package:barbers_app/screens/sign_up_page.dart';
+import 'package:barbers_app/screens/splash_screen.dart';
 import 'package:barbers_app/service/barber_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,7 +45,7 @@ class Root extends StatelessWidget {
           textTheme: GoogleFonts.robotoTextTheme(),
         ),
         routes: {
-          '/': (context) => const HomeScreen(),
+          '/': (context) => const SplashScreen(child: LoginPage(),),
           LoginPage.route: (context) => const LoginPage(),
           '/signUp': (context) => const SignUpPage(),
           '/home': (context) => const HomeScreen(),
@@ -58,4 +59,9 @@ class Root extends StatelessWidget {
       ),
     );
   }
+
+
+
+
+  
 }
