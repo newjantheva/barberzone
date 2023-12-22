@@ -9,7 +9,7 @@ part 'search_state.dart';
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
   final BarberRepository repository;
   SearchBloc({required this.repository}) : super(SearchInitial()) {
-    on<SearchBarbersEvent>((event, emit) {
+    on<SearchBarbersEvent>((event, emit) async {
       if (event.query.isEmpty) {
         emit(SearchEmpty());
       }
@@ -19,7 +19,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         emit(SearchLoading());
 
         //success
-        final barbers = repository.searchBarbers(event.query);
+        final barbers = await repository.searchBarbers(event.query);
 
         emit(SearchSuccess(barbers: barbers));
       } catch (error) {

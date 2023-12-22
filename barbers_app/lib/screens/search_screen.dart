@@ -28,8 +28,8 @@ class _SearchScreenState extends State<SearchScreen> {
     super.initState();
   }
 
-  void fetch() {
-    barbers = _repository.fetchBarbers();
+  Future<void> fetch() async {
+    barbers = await _repository.fetchBarbers();
   }
 
   void _filterBarbers(String query) {

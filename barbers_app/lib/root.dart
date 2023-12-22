@@ -1,3 +1,4 @@
+import 'package:barbers_app/blocs/barber_bloc/barber_bloc.dart';
 import 'package:barbers_app/blocs/search_bloc/search_bloc.dart';
 import 'package:barbers_app/repo/barber_repository.dart';
 import 'package:barbers_app/screens/booking_screen.dart';
@@ -9,6 +10,7 @@ import 'package:barbers_app/screens/map_screen.dart';
 import 'package:barbers_app/screens/profile_screen.dart';
 import 'package:barbers_app/screens/search_screen.dart';
 import 'package:barbers_app/screens/sign_up_page.dart';
+import 'package:barbers_app/screens/splash_screen.dart';
 import 'package:barbers_app/service/barber_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,12 +21,23 @@ class Root extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => SearchBloc(
-        repository: BarberRepository(
-          BarberService(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => SearchBloc(
+            repository: BarberRepository(
+              BarberService(),
+            ),
+          ),
         ),
-      ),
+        BlocProvider(
+          create: (context) => BarberBloc(
+            repository: BarberRepository(
+              BarberService(),
+            ),
+          ),
+        )
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
@@ -32,7 +45,7 @@ class Root extends StatelessWidget {
           textTheme: GoogleFonts.robotoTextTheme(),
         ),
         routes: {
-          '/': (context) => const HomeScreen(),
+          '/': (context) => const SplashScreen(child: LoginPage(),),
           LoginPage.route: (context) => const LoginPage(),
           '/signUp': (context) => const SignUpPage(),
           '/home': (context) => const HomeScreen(),
@@ -41,8 +54,14 @@ class Root extends StatelessWidget {
           '/profile': (context) => const ProfileScreen(),
           '/employees': (context) => const EmployeesScreen(),
           '/booking': (context) => const BookingScreen(title: "test"),
+          '/createbarber': (context) => const CreateBarberScreen(),
         },
       ),
     );
   }
+
+
+
+
+  
 }
