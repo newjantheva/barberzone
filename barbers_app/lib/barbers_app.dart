@@ -1,6 +1,7 @@
 import 'package:barbers_app/blocs/barber_bloc/barber_bloc.dart';
 import 'package:barbers_app/get_it.dart';
 import 'package:barbers_app/screens/home_screen.dart';
+import 'package:barbers_app/screens/customer_login_page.dart';
 import 'package:barbers_app/screens/login_page.dart';
 import 'package:barbers_app/screens/map_screen.dart';
 import 'package:barbers_app/screens/profile_screen.dart';
@@ -29,8 +30,7 @@ class BarbersApp extends StatelessWidget {
           fontFamily: GoogleFonts.getFont('Montserrat').fontFamily,
         ),
         routes: {
-          '/': (context) => const HomeScreen(),
-          '/login': (context) => const LoginPage(),
+          '/': (context) => const LoginPage(),
           '/signUp': (context) => const SignUpPage(),
           '/home': (context) => const HomeScreen(),
           '/map': (context) => const MapScreen(),

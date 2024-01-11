@@ -1,4 +1,5 @@
 import 'package:barbers_app/global/common/toast.dart';
+import 'package:barbers_app/screens/customer_login_page.dart';
 import 'package:barbers_app/screens/login_page.dart';
 import 'package:barbers_app/services/firebase_auth_services.dart';
 import 'package:barbers_app/widgets/form_container_widget.dart';
@@ -107,7 +108,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => LoginPage()),
+                                builder: (context) => const LoginPage()),
                             (route) => false);
                       },
                       child: Text(
