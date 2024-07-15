@@ -5,7 +5,8 @@ import 'package:barbers_app/screens/create_barber_screen.dart';
 import 'package:barbers_app/screens/map_screen.dart';
 import 'package:barbers_app/screens/profile_screen.dart';
 import 'package:barbers_app/screens/search_screen.dart';
-import 'package:barbers_app/widgets/home_list.dart';
+import 'package:barbers_app/widgets/home_barbershop_carousel.dart';
+import 'package:barbers_app/widgets/home_haircuts_carousel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -25,9 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
-  void _openCreateBarberScreen() {
-    Navigator.pushNamed(context, CreateBarberScreen.route);
-  }
+  void _openCreateBarberScreen(BuildContext context) {}
 
   final _navigationItems = [
     NavigationItem(
@@ -72,7 +71,10 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: const Icon(Icons.logout_rounded),
           ),
           IconButton(
-              onPressed: _openCreateBarberScreen, icon: const Icon(Icons.add))
+            onPressed: () =>
+                Navigator.pushNamed(context, CreateBarberScreen.route),
+            icon: const Icon(Icons.add),
+          )
         ],
       ),
       body: PageView(

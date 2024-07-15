@@ -1,6 +1,6 @@
-import 'package:barbers_app/repositories/barber_repository.dart';
+import 'package:barbers_app/blocs/barber_bloc/barber_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CreateBarberScreen extends StatefulWidget {
   static String route = '/createbarber';
@@ -31,6 +31,11 @@ class _CreateBarberScreenState extends State<CreateBarberScreen> {
     _nameController.dispose();
     _descriptionController.dispose();
     super.dispose();
+  }
+
+  void _createBarber() {
+    BlocProvider.of<BarberBloc>(context).add(CreateBarberEvent(
+        name: _nameController.text, description: _descriptionController.text));
   }
 
   @override
@@ -66,9 +71,42 @@ class _CreateBarberScreenState extends State<CreateBarberScreen> {
               onPressed: _createBarber,
               child: const Text(
                 'Create Barber',
-                style: TextStyle(),
+                style: TextStyle(
+                  color: Colors.black,
+                ),
               ),
             ),
+            BlocBuilder<BarberBloc, BarberState>(
+              builder: (context, state) {
+                switch (state) {
+                  case BarberEmpty():
+                    return const Text(
+                      "Empty",
+                      style: TextStyle(color: Colors.white),
+                    );
+                  case BarberCreating():
+                    return const CircularProgressIndicator();
+                  case BarberCreated():
+                    {
+                      final statebarber = state.barber;
+                      if (statebarber == null) {
+                        return const Text("Something went wrong",
+                            style: TextStyle(color: Colors.white));
+                      } else {
+                        return const Text("Created",
+                            style: TextStyle(color: Colors.white));
+                      }
+                    }
+                  case BarberFailure():
+                    return const Text(
+                      "Failure",
+                      style: TextStyle(color: Colors.white),
+                    );
+                  default:
+                    return Container();
+                }
+              },
+            )
           ],
         ),
       ),
