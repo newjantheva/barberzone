@@ -16,3 +16,5 @@ final class CreateBarberEvent extends BarberEvent {
   @override
   List<Object> get props => [name, description];
 }
+
+class FetchBarbers extends BarberEvent {}

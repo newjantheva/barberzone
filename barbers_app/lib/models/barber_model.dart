@@ -15,10 +15,6 @@ class Barber {
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'name': name,
-      'description': description
-    };
+    return {'id': id, 'name': name, 'description': description};
   }
 }

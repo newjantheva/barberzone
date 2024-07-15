@@ -1,4 +1,3 @@
-import 'package:barbers_app/models/barber_model.dart';
 import 'package:flutter/material.dart';
 
 class NavigationItem {

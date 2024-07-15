@@ -1,14 +1,30 @@
-import 'package:barbers_app/widgets/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
-  static const String route = '/login';
   const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: OnboardingScreen(),
+    return Scaffold(
+      body: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(
+            bottom: const TabBar(
+              tabs: [
+                Tab(text: "Private"),
+                Tab(text: "Business"),
+              ],
+            ),
+          ),
+          body: const TabBarView(
+            children: [
+              Icon(Icons.directions_car),
+              Icon(Icons.directions_transit),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

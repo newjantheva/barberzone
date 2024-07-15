@@ -69,7 +69,6 @@ class _ProductServiceListContentState extends State<ProductServiceListContent> {
                           Container(
                             width: MediaQuery.of(context).size.width,
                             height: MediaQuery.of(context).size.height / 4,
-                            color: Colors.white,
                             child: const Padding(
                               padding: EdgeInsets.only(left: 15.0),
                               child: Expanded(

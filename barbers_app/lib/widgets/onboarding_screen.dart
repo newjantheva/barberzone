@@ -114,20 +114,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: Card(
         elevation: 1,
         child: Stack(
           fit: StackFit.expand,
           children: [
-            Container(
-              color: Colors.black,
-            ),
             Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Container(
                   decoration: const BoxDecoration(
-                    color: Colors.white,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(25),
                       topRight: Radius.circular(25),
@@ -194,9 +191,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           hintText: "Password",
           isPasswordField: true,
         ),
-        SizedBox(
-          height: 30,
-        ),
         GestureDetector(
           onTap: () {
             _signUp();
@@ -205,42 +199,33 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             width: double.infinity,
             height: 45,
             decoration: BoxDecoration(
-              color: Colors.blue,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Center(
                 child: isSigningUp
-                    ? CircularProgressIndicator(
-                        color: Colors.white,
-                      )
-                    : Text(
+                    ? const CircularProgressIndicator()
+                    : const Text(
                         "Sign Up",
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
                       )),
           ),
-        ),
-        SizedBox(
-          height: 20,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Already have an account?"),
-            SizedBox(
+            const Text("Already have an account?"),
+            const SizedBox(
               width: 5,
             ),
             GestureDetector(
-                onTap: () {
-                  _pageController.previousPage(
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.ease);
-                },
-                child: Text(
-                  "Login",
-                  style: TextStyle(
-                      color: Colors.blue, fontWeight: FontWeight.bold),
-                ))
+              onTap: () {
+                _pageController.previousPage(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.ease);
+              },
+              child: const Text(
+                "Login",
+              ),
+            )
           ],
         )
       ],
@@ -279,18 +264,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             width: double.infinity,
             height: 45,
             decoration: BoxDecoration(
-              color: Colors.blue,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Center(
               child: _isSigning
-                  ? CircularProgressIndicator(
-                      color: Colors.white,
-                    )
+                  ? CircularProgressIndicator()
                   : Text(
                       "Login",
                       style: TextStyle(
-                        color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -308,7 +289,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             width: double.infinity,
             height: 45,
             decoration: BoxDecoration(
-              color: Colors.red,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Center(
@@ -317,7 +297,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 children: [
                   Icon(
                     FontAwesomeIcons.google,
-                    color: Colors.white,
                   ),
                   SizedBox(
                     width: 5,
@@ -325,7 +304,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   Text(
                     "Sign in with Google",
                     style: TextStyle(
-                      color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -353,7 +331,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               child: const Text(
                 "Sign Up",
                 style: TextStyle(
-                  color: Colors.blue,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -401,7 +378,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             padding: const EdgeInsets.only(left: 10, top: 15),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.orange,
                 borderRadius: BorderRadius.circular(25),
               ),
               height: 50,
@@ -417,12 +393,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       "Start",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
                       ),
                     ),
                     Icon(
                       Icons.arrow_right_alt_rounded,
-                      color: Colors.white,
                     )
                   ],
                 )),

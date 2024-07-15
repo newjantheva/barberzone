@@ -28,7 +28,6 @@ class _HomeHaircutsCarouselState extends State<HomeHaircutsCarousel> {
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(5)),
               border: Border.all(
-                color: Colors.white60,
                 style: BorderStyle.solid,
                 width: 2,
               ),
@@ -38,10 +37,10 @@ class _HomeHaircutsCarouselState extends State<HomeHaircutsCarousel> {
               children: [
                 const Icon(
                   Icons.room_service,
-                  color: Colors.white,
                 ),
-                Text('Item $index',
-                    style: const TextStyle(color: Colors.white)),
+                Text(
+                  'Item $index',
+                ),
               ],
             ),
           ),
